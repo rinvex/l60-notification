@@ -25,7 +25,7 @@ class NotificationServiceProvider extends ServiceProvider
             __DIR__ . '/../../config/notification.php' => config_path('notification.php'),
         ), 'config');
 
-        $dispatcher->subscribe('Krucas\Notification\Subscriber');
+        //$dispatcher->subscribe('Krucas\Notification\Subscriber');
 
         $this->app->afterResolving('blade.compiler', function ($bladeCompiler) {
             $bladeCompiler->directive('notification', function ($container = null) {
@@ -33,7 +33,7 @@ class NotificationServiceProvider extends ServiceProvider
                     $container = null;
                 }
 
-                return "<?php echo app('notification')->container({$container})->show(); ?>";
+                return "<?php echo app('notification')->container($container)->show(); ?>";
             });
         });
     }
@@ -67,9 +67,9 @@ class NotificationServiceProvider extends ServiceProvider
 
         $this->app->alias('notification', 'Krucas\Notification\Notification');
 
-        $this->app->singleton('Krucas\Notification\Subscriber', function ($app) {
-            return new Subscriber($app['session.store'], $app['config']['notification.session_key']);
-        });
+        //$this->app->singleton('Krucas\Notification\Subscriber', function ($app) {
+        //    return new Subscriber($app['session.store'], $app['config']['notification.session_key']);
+        //});
 
         $this->app->singleton('Krucas\Notification\Middleware\NotificationMiddleware', function ($app) {
             return new NotificationMiddleware(
@@ -89,7 +89,7 @@ class NotificationServiceProvider extends ServiceProvider
     {
         return array(
             'Krucas\Notification\Notification',
-            'Krucas\Notification\Subscriber',
+            //'Krucas\Notification\Subscriber',
             'notification',
         );
     }
