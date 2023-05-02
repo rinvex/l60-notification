@@ -5,6 +5,11 @@
 
 ---
 
+## [5.3.0] - 2023-05-02
+- bda99c8: Add support for Laravel v11, and drop support for Laravel v9
+- 627880b: Update phpunit to v10.1 from v9.5
+- 232f115: Drop PHP v8.0 support and update composer dependencies
+
 #5.1.0
 ---
 
